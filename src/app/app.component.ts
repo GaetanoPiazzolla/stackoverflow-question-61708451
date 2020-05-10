@@ -13,7 +13,12 @@ import {sample} from '../../node_modules/underscore/underscore';
 // so we can add it to angular.json "script" field: https://angular.io/guide/workspace-config
 // "An object containing JavaScript script files to add to the global context of the project."
 // and then we can use it like this:
-declare var $: any;
+// declare var $: any;
+// https://dzone.com/articles/quick-tip-%E2%80%93-typescript-declare
+
+// still, the correct approach is to use the @types for jquery and then we can use ti like this
+// https://www.angularjswiki.com/angular/how-to-install-and-use-jquery-in-angular-projects/
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
