@@ -1,27 +1,19 @@
-# Library
+# Question
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
+I use Angular with vanillajs libraries. There is no problem. Library works fine, but most of the time, I have to do the following
 
-## Development server
+declare var MyLib: any;
+However, for this particular library (CanvasJS), this works...
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+import * as CanvasJS from '../../assets/canvasjs/canvasjs.min.js';
+What's different, and most importantly how does the library allow import function directly?
 
-## Code scaffolding
+# Answer
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The difference is inside the JS library that you are importing.
+In this repository I've added a showcase using canvasJs, underscoreJs and Jquery.
 
-## Build
+Only the latter has the need to be defined as a "script" inside the angular.json file ( or inside the index.html file, it's the same ) because it's not defined as an exportable object but it's a factory which adds to the global context the variable $ when initialized.
+So in this case, you don't need to IMPORT it, you just have to "declare" the already present variable in the context to not have TypeScript errors!
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+As a bonus, the correct way to use JQuery inside an angular project is to install jquery @types, you can find it in the branch correctJquery.
